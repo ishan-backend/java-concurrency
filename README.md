@@ -162,4 +162,3 @@ The Basics -> Java Memory Model -> Java Concurrency Reference -> MultiThreading 
   * when thread is waiting, it lets go of lock
   * thread only relinquishes lock on object on which wait method was invoked
   * threads waiting for notify from object are grouped, because those threads use object.wait()
-  *
