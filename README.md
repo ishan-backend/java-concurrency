@@ -121,3 +121,21 @@ All JAVA concurrency constructs with notes/references and implementation
     Note: Non-Synchronized methods can be called by any thread at any point in time.
   - **Race Condition:**
     - When two or more threads try to access/update same index in stack, leaving it in undefined/inconsistent state.
+
+**Thread State Transitions**:
+![thread states](./Screenshot 2024-03-17 at 10.59.16 AM.png)
+
+![thread transitions](./Screenshot 2024-03-17 at 11.03.22 AM.png)
+
+![running and yielding](./Screenshot 2024-03-17 at 11.19.47 AM.png)
+  * yield() is an advisory method (not guaranteed immediately) to JVM to move thread from running to ready-to-run state.
+
+![sleep and interrupted exception](./Screenshot 2024-03-17 at 11.22.50 AM.png)
+  * whenever we are calling sleep() method we need to enclose it in interrupted exception, whenever it gets chance to execute/run it will throw interrupted exception.
+  * when thread is sleeping, it does not let go of lock
+
+![waiting and notifying](./Screenshot 2024-03-17 at 11.24.41 AM.png)
+  * when thread is waiting, it lets go of lock
+  * thread only relinquishes lock on object on which wait method was invoked
+  * threads waiting for notify from object are grouped, because those threads use object.wait()
+  *
