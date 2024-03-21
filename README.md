@@ -25,6 +25,30 @@ All JAVA concurrency constructs with notes/references and implementation
 3. 5.3 Atomic Data Types
 
 ----------------------------------------------------------------------------------------------------------------------------
+Java MultiThreading for Senior Engineer Interviews:
+The Basics -> Java Memory Model -> Java Concurrency Reference -> MultiThreading in JAVA -> Interview Practice Problems
+
+**Java Concurrency Reference**:
+1. Creating Threads:
+   * Runnable Interface
+     ```text
+     We need to tell the thread what task to execute.
+     The code can be provided as an object of a class that implements the Runnable interface. As the name implies, the interface forces the implementing class to provide a run method which in turn is invoked by the thread when it starts.
+
+     The runnable interface is the basic abstraction to represent a logical task in Java. 
+     ```
+   * Subclassing Thread class
+     ```text
+     The con of the second approach is that one is forced to extend the Thread class which limits code’s flexibility.
+     ```
+     
+
+
+  
+
+
+
+----------------------------------------------------------------------------------------------------------------------------
 * In java, two ways to create a thread:
   * Extend Thread class
   ```java
