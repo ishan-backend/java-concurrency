@@ -1,4 +1,4 @@
-package tpAndNonBlockingAlgo.threadPool;
+package tpAndNonBlockingAlgo.pairCounterBeforeThreadPool;
 
 import java.util.List;
 import java.util.concurrent.Callable;
