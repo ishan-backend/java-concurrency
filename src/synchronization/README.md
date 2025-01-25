@@ -47,7 +47,6 @@
      * Barrier in JAVA is called CyclicBarrier
        * Lot of other edge cases:
          * Spurious wakeups after it goes to wait()
-         * 
   4. Blocking Queue:
      * Earlier, we had 2 types of queues - normal and shared queue
      * Shared queue - normal producer-consumer problem
@@ -61,3 +60,15 @@
      * Collection Blocking Queue implementation inside MyBlockingQueue
      * Also, explore ConcurrentHashmap - thread safe
      * WRITE DATA STRUCTURES THAT ARE THREAD SAFE, CLIENTS SHOULD BE ABLE TO RELY ON YOUR DS.
+  5. Futures:
+     * Till now, Runnable interface has run() method that contains some logic but does not return anything
+     * If from main thread, launch another thread, no way that thread returns you some value to main thread
+     * The async task should return you some value
+       * Until some shared variable is kept
+       * Main routine must continous poll to check that value, and identify change from async task
+       * This is tedious
+     * So here comes futures
+     * Class that implements Runnable interface has one more method get() method will contain logic for blocking and returning when task is over
+     * Just like Runnable interface, you have Callable interface which returns generic type, has a call() method just like run()
+     * There is an in built synchronizer called FutureTask<> Class (actually a supertype runnable since it implements RunnableFuture which extends Runnable)
+     * FutureTask has a constructor which you can inject Callable
