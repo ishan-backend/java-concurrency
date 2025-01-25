@@ -5,6 +5,7 @@ import tpAndNonBlockingAlgo.pairCounterBeforeThreadPool.PairCounter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
@@ -19,6 +20,10 @@ public class Main {
         // Client side / producer simulation
         for(int i=0; i<20; i++) { // submit tasks to threadPool
             FutureTask<Integer> res = null;
+//            if (i%3 == 0) {
+//                threadPool.submit(new Thrower());
+//            }
+
             if(i%2 == 0) {
                 int qty = 30000;
                 List<Integer> nums = new ArrayList<>();

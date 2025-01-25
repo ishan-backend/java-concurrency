@@ -44,3 +44,6 @@
      * JVM will exit threadpool, when all threads are shut down. Have an explicit shutdown method as well.
        * program needs to shutdown threadpool before exiting.
        * terminate threads gracefully.
+     * Handling thread deaths:
+       * shear unresponsiveness - user keeps on waiting for task to be completed
+       * BookKeeper thread -> a runnable

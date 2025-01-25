@@ -1,7 +1,9 @@
 package tpAndNonBlockingAlgo.threadPool;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
@@ -16,18 +18,26 @@ public class ThreadPool {
 
     private boolean hasShutdown; // non-final as it will change
 
+    private final Thread bookKeeper; // reads through the set of dead thread ids and replaces them with new thread
+    // set of dead threads
+    private final Set<Integer> deadThreadIds; // whenever a thread is about to die, it would register itself here
+
     public ThreadPool(int numThreads) {
         this.numThreads = numThreads;
         this.threads = new ArrayList<>();
+        this.deadThreadIds = new HashSet<>();
+
         this.tasksQueue = new ArrayBlockingQueue<>(10); //  not hold more than 10 pending tasks
         for(int i=0; i<numThreads; i++) {
-            Thread t = new Thread(new Worker(i, tasksQueue));
+            Thread t = new Thread(new Worker(i, tasksQueue, this.deadThreadIds));
             this.threads.add(t); // threads have just been created and not launched
         }
 
         for(Thread t: threads) {
             t.start(); // worker threads launched
         }
+        this.bookKeeper = new Thread(new BookKeeper(deadThreadIds, threads, tasksQueue));
+        this.bookKeeper.start();
     }
 
     // we can submit some futureTask wrapped around Callable, futureTask can be submitted to Runnable
