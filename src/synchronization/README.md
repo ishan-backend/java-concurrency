@@ -38,9 +38,16 @@
          * Can be 100 writer threads, but at a time only 3 threads can write
   3. Barrier (rokna):
      * Non-deterministic problem (pata ni kab khtm hoga)
-     * Broken problem to 10 threads - the threads do their job independently and concurrently.
-     * After the completion of tasks (all threads have finished) (inspection), we try to merge back the results. But individual thread has to wait till all threads have finished. 
+     * Broken problem to 10 threads (sub problems) - the threads do their job independently and concurrently.
+     * After the completion of tasks (threads put to wait till all threads have finished) (inspection), we try to merge back the results. But individual thread has to wait till all threads have finished. 
      * If inspection (expected answer matching) fails, we might try to re-run those jobs (schedule them again). Else, we will terminate.
+     * Components input:
+       * numThreads - no of threads participating in barrier
+       * BarrierTask - when all threads have gathered over barrier point, before launching them again we run barrier task
+     * Barrier in JAVA is called CyclicBarrier
+       * Lot of other edge cases:
+         * Spurious wakeups after it goes to wait()
+         * 
   4. Blocking Queue:
      * Earlier, we had 2 types of queues - normal and shared queue
      * Shared queue - normal producer-consumer problem
@@ -53,3 +60,4 @@
      * Consumer - consuming message and take business action
      * Collection Blocking Queue implementation inside MyBlockingQueue
      * Also, explore ConcurrentHashmap - thread safe
+     * WRITE DATA STRUCTURES THAT ARE THREAD SAFE, CLIENTS SHOULD BE ABLE TO RELY ON YOUR DS.
