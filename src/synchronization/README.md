@@ -51,4 +51,5 @@
      * If we don't want above i.e. wait() and notify() contained in client, we can use BlockingQueue (synchronized DS/collection contains it)
      * Producer - draft message and send it
      * Consumer - consuming message and take business action
-     * 
+     * Collection Blocking Queue implementation inside MyBlockingQueue
+     * Also, explore ConcurrentHashmap - thread safe
