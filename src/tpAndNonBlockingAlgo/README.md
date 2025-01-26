@@ -71,3 +71,20 @@
            * periodic task -> after pick 1 second run, then 3, 3, 3... seconds
              * inside while loop, after running task, update Fire time and put into tasksQueue
            
+
+   * Executor service:
+     * Executor Interface:
+       * executes run method of the passed Runnable
+       * no element of concurrency
+       * concrete implementations:
+         * our implementation of Executor Interface will handle concurrency / thread pool
+     * ExecutorService interface extends Executor interface:
+       * other lifecycle management methods
+       * shutdown and shutdown now
+       * awaitTermination
+       * submit callable
+       * submit runnable
+       * has factory of thread pool methods
+       * ThreadPoolExecutor class implements ExecutorService
+         * newFixedThreadPool
+         * newCachedThreadPool
