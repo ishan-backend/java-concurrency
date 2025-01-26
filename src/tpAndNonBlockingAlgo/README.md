@@ -46,4 +46,28 @@
        * terminate threads gracefully.
      * Handling thread deaths:
        * shear unresponsiveness - user keeps on waiting for task to be completed
-       * BookKeeper thread -> a runnable
+       * BookKeeper thread -> a runnable, last thread to terminate
+       * TODO: maintain a counter = no of threads in pool
+         * when thread expires/exit, it can decrement the count
+         * when shared var count = 0, read by BookKeeper thread and decremented by Worker threads.
+         * when count = 0, bookkeeper would exit too
+     
+   * One shot and Periodic tasks:
+     * Thread Pool execution policy:
+       * How tasks are being picked up? - extract FIFO order, extract priority tasks
+       * Thread safe priority queue
+       * Concrete implementation of interface Blocking Queue is very similar to what we need
+     * Write a scheduler
+       * Clients should be able to submit tasks & tell when they want tasks to execute
+       * One shot task
+       * Periodic task - after a task has completed then after defined period
+       * Approaches:
+         * Fire time = system.current time + gap (at this concrete time, want task to execute)
+         * Priority queue -> smallest Fire time number has more priority
+         * Execution of tasks ->
+           * current system time < current task Fire time
+             * while loop continuously check, but cannot sleep in Thread for fix duration i.e. busy waiting
+           * one shot task -> easy pick from queue, wait or get job done.
+           * periodic task -> after pick 1 second run, then 3, 3, 3... seconds
+             * inside while loop, after running task, update Fire time and put into tasksQueue
+           

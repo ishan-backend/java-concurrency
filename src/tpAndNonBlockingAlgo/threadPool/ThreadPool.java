@@ -1,13 +1,9 @@
 package tpAndNonBlockingAlgo.threadPool;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.Callable;
-import java.util.concurrent.FutureTask;
+import tpAndNonBlockingAlgo.periodicTask.Task;
+
+import java.util.*;
+import java.util.concurrent.*;
 
 public class ThreadPool {
     private final int numThreads;
@@ -28,6 +24,7 @@ public class ThreadPool {
         this.deadThreadIds = new HashSet<>();
 
         this.tasksQueue = new ArrayBlockingQueue<>(10); //  not hold more than 10 pending tasks
+
         for(int i=0; i<numThreads; i++) {
             Thread t = new Thread(new Worker(i, tasksQueue, this.deadThreadIds));
             this.threads.add(t); // threads have just been created and not launched
