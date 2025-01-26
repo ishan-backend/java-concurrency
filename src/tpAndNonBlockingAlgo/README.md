@@ -88,3 +88,23 @@
        * ThreadPoolExecutor class implements ExecutorService
          * newFixedThreadPool
          * newCachedThreadPool
+
+2. Copy on write and Lock striping:
+   * 1 Publisher - many subscribers
+   * ConcurrentModificationException - 
+
+
+3. Build your own Hashmap
+   * Array of buckets, every bucket has multiple entries
+   * Hash function - compute hashcode and decide bucket
+   * Collision happens - create LL from particular bucket
+   * When LL size grows, we create balanced BST from that LL
+   * When we initialise hashmap, finite no of buckets
+   * When individual buckets size grows, we increase buckets and re-hash the KV pairs stored
+   * Functions:
+     * get of key
+     * put of kv pair
+     * delete of kv pair
+   * 2 Functions in implementation:
+     * get, put
+     * concurrent hashmap
